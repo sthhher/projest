@@ -117,7 +117,7 @@ class Protein(object):
                     residuee[residue_name + ' - ' + str(value_dictionary)] = {
                         "residue_sequence_number":residue_sequence_number,
                         "residue_name":residue_name,
-                        residue_name:{
+                        "ATOM":{
                             "atom_serial_number":atom_serial_number, 
                             "atom_name":atom_name, 
                             "x_coordinate":x_coordinate, 
@@ -136,6 +136,6 @@ class Protein(object):
 
             return cadena
 
-dictionary = Protein("1xxm").general_dictionary()
+dictionary = Protein("1m1y").general_dictionary()
 collection.insert_one(dictionary)
 print(dictionary)
