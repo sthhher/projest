@@ -41,7 +41,7 @@ class Protein(object):
                     Chain.chain_identifier = Chain.chain_identifier.strip()
                     if Chain.chain_identifier not in list_differents_chains:
                         list_differents_chains.append(Chain.chain_identifier)
-                        cadenas[Chain.chain_identifier] = []
+                        cadenas[Chain.chain_identifier] = {}
             return cadenas
 
     def get_similar_protein(self): #VA BIEN -> HACER UN TEST Y UN IF EN LA FUNCION PARA SI UNA CADENA DE PROTEINA ESTA MAL
@@ -114,7 +114,7 @@ class Protein(object):
                     Atom.element_symbol = line[76:78]
                     element_symbol = Atom.element_symbol.strip()
                     
-                    residuee = {
+                    residuee[residue_name + ' - ' + str(value_dictionary)] = {
                         "residue_sequence_number":residue_sequence_number,
                         "residue_name":residue_name,
                         residue_name:{
@@ -130,12 +130,12 @@ class Protein(object):
                     }
 
                     try:
-                        cadena[chain_identifier].append(residuee)
+                        cadena[chain_identifier] = residuee
                     except:
-                        cadena[chain_identifier].append(residuee)
+                        cadena[chain_identifier] = residuee
 
             return cadena
 
-dictionary = Protein("1m1y").general_dictionary()
+dictionary = Protein("1xxm").general_dictionary()
 collection.insert_one(dictionary)
 print(dictionary)
