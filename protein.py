@@ -70,12 +70,39 @@ class Protein(object):
 
     def general_dictionary(self):
         value_dictionary = 0
-        residuee = {}
-        cadena = self.chain_list()
+        residue_A = {}
+        residue_B = {}
+        residue_C = {}
+        residue_D= {}
+        residue_E = {}
+        residue_F = {}
+        residue_G = {}
+        residue_H = {}
+        residue_I = {}
+        residue_J = {}
+        residue_K = {}
+        residue_L = {}
+        residue_M = {}
+        residue_N = {}
+        residue_O = {}
+        residue_P= {}
+        residue_Q = {}
+        residue_R = {}
+        residue_S = {}
+        residue_T = {}
+        residue_U = {}
+        residue_V = {}
+        residue_W = {}
+        residue_X = {}
+        residue_Y = {}
+        residue_Z = {}
+
+        protein = {"_id":self.protein_name}
 
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
                 if line.startswith("ATOM"):
+
                     value_dictionary +=1
 
                     #CHAIN
@@ -114,28 +141,500 @@ class Protein(object):
                     Atom.element_symbol = line[76:78]
                     element_symbol = Atom.element_symbol.strip()
                     
-                    residuee[residue_name + ' - ' + str(value_dictionary)] = {
-                        "residue_sequence_number":residue_sequence_number,
-                        "residue_name":residue_name,
-                        "ATOM":{
-                            "atom_serial_number":atom_serial_number, 
-                            "atom_name":atom_name, 
-                            "x_coordinate":x_coordinate, 
-                            "y_coordinate":y_coordinate, 
-                            "z_coordinate":z_coordinate, 
-                            "occupancy":occupancy, 
-                            "temperature_factor":temperature_factor,
-                            "element_symbol":element_symbol
+                    if chain_identifier == "A":
+                        residue_A[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
                         }
-                    }
 
-                    try:
-                        cadena[chain_identifier] = residuee
-                    except:
-                        cadena[chain_identifier] = residuee
+                        protein[chain_identifier] = residue_A
 
-            return cadena
+                    elif chain_identifier == "B":
+                        residue_B[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
 
-dictionary = Protein("1m1y").general_dictionary()
+                        protein[chain_identifier] = residue_B
+
+                    elif chain_identifier == "C":
+                        residue_C[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_C
+
+                    if chain_identifier == "D":
+                        residue_D[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_D
+    
+                    elif chain_identifier == "E":
+                        residue_E[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_E
+
+                    elif chain_identifier == "F":
+                        residue_F[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                    elif chain_identifier == "G":
+                        residue_G[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_G
+
+                    elif chain_identifier == "H":
+                        residue_H[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_H
+
+                    elif chain_identifier == "I":
+                        residue_I[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_I
+    
+                    elif chain_identifier == "J":
+                        residue_J[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_J
+
+                    elif chain_identifier == "K":
+                        residue_K[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_K
+
+                    elif chain_identifier == "L":
+                        residue_L[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_L
+
+                    elif chain_identifier == "M":
+                        residue_M[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_M
+
+                    elif chain_identifier == "N":
+                        residue_N[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_N
+    
+                    elif chain_identifier == "O":
+                        residue_O[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_O
+
+                    elif chain_identifier == "P":
+                        residue_P[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_P
+
+                    elif chain_identifier == "Q":
+                        residue_Q[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_Q
+
+                    elif chain_identifier == "R":
+                        residue_R[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_R
+
+                    elif chain_identifier == "S":
+                        residue_S[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_S
+    
+                    elif chain_identifier == "T":
+                        residue_T[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_T
+
+                    elif chain_identifier == "U":
+                        residue_U[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_U
+
+                    elif chain_identifier == "V":
+                        residue_V[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_V
+
+                    elif chain_identifier == "W":
+                        residue_W[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_W
+
+                    elif chain_identifier == "X":
+                        residue_X[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_X
+
+                    elif chain_identifier == "Y":
+                        residue_Y[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_Y
+
+                    elif chain_identifier == "Z":
+                        residue_Z[residue_name + " - " + str(value_dictionary)] = {
+                            "chain_identifier":chain_identifier,
+                            "residue_sequence_number":residue_sequence_number,
+                            "residue_name":residue_name,
+                            "ATOM":{
+                                "atom_serial_number":atom_serial_number, 
+                                "atom_name":atom_name, 
+                                "x_coordinate":x_coordinate, 
+                                "y_coordinate":y_coordinate, 
+                                "z_coordinate":z_coordinate, 
+                                "occupancy":occupancy, 
+                                "temperature_factor":temperature_factor,
+                                "element_symbol":element_symbol
+                            }
+                        }
+
+                        protein[chain_identifier] = residue_Z
+        return protein
+
+
+dictionary = Protein("4M8B").general_dictionary()
 collection.insert_one(dictionary)
 print(dictionary)
