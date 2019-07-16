@@ -24,9 +24,8 @@ class Protein(object):
 
     def __init__(self, protein_name):
         self.protein_name = protein_name
-        extract_atoms_information.load_protein_pdb(self.protein_name) #Que se cree automaticamente para no tener que hacerlo en cada funcion
+        extract_atoms_information.load_protein_pdb(self.protein_name) #It creates automatically so, we dont have to do it.
         extract_atoms_information.load_protein_fasta(self.protein_name)
-        #extract_atoms_information.insert_proteins_mongo(self.protein_name)
     
     def get_sequence_aminoacids (self): #NO ACABADA
         record = []
@@ -35,7 +34,6 @@ class Protein(object):
 
     def chain_list(self): #Return the differents chains there are
         list_differents_chains = []
-        cadenas = {"_id":self.protein_name}
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
                 if line.startswith("ATOM"):
@@ -43,8 +41,18 @@ class Protein(object):
                     Chain.chain_identifier = Chain.chain_identifier.strip()
                     if Chain.chain_identifier not in list_differents_chains:
                         list_differents_chains.append(Chain.chain_identifier)
-                        cadenas[Chain.chain_identifier] = {}
-            return cadenas
+            return list_differents_chains
+
+    def aminoacid_list(self):
+        with open(self.protein_name, 'r+') as text_file:
+            for line in text_file:
+                if line.startswith("ATOM"):
+                    Aminoacid.residue_name = line[17:20]
+                    residue_name = Aminoacid.residue_name.strip()
+
+                    Aminoacid.residue_sequence_number = line[22:26]
+                    residue_sequence_number = Aminoacid.residue_sequence_number.strip()
+                    return residue_name, residue_sequence_number
 
     def get_similar_protein(self): #VA BIEN -> HACER UN TEST Y UN IF EN LA FUNCION PARA SI UNA CADENA DE PROTEINA ESTA MAL
         dicc_hit_def = {}
@@ -85,8 +93,6 @@ class Protein(object):
                     Chain.chain_identifier = line[21]
                     chain_identifier = Chain.chain_identifier.strip()
 
-                    letter = protein.setdefault(chain_identifier, {})
-
                     #AMINOACID
                     Aminoacid.residue_name = line[17:20]
                     residue_name = Aminoacid.residue_name.strip()
@@ -95,9 +101,6 @@ class Protein(object):
                     residue_sequence_number = Aminoacid.residue_sequence_number.strip()
 
                     #ATOM
-                    Atom.atom_serial_number = line[6:11]
-                    atom_serial_number = Atom.atom_serial_number.strip()
-
                     Atom.atom_name = line[12:16]
                     atom_name = Atom.atom_name.strip()
 
@@ -119,26 +122,24 @@ class Protein(object):
                     Atom.element_symbol = line[76:78]
                     element_symbol = Atom.element_symbol.strip()
                     
-                    letter[residue_name + " - " + str(value_dictionary)] = {
-                        "chain_identifier":chain_identifier,
-                        "residue_sequence_number":residue_sequence_number,
-                        "residue_name":residue_name,
-                        "ATOM":{
-                            "atom_serial_number":atom_serial_number, 
-                            "atom_name":atom_name, 
-                            "x_coordinate":x_coordinate, 
-                            "y_coordinate":y_coordinate, 
-                            "z_coordinate":z_coordinate, 
-                            "occupancy":occupancy, 
-                            "temperature_factor":temperature_factor,
-                            "element_symbol":element_symbol
-                        }
+                    #SETDEFAULTs
+                    chain_letter = protein.setdefault(chain_identifier, {})
+                    residue_letter = chain_letter.setdefault(residue_name, {})
+                    residue_number = residue_letter.setdefault(residue_sequence_number, {})
+                    atom_letter = residue_number.setdefault(element_symbol, {})
+
+                    atom_letter[atom_name] = {
+                        "x_coordinate":x_coordinate, 
+                        "y_coordinate":y_coordinate, 
+                        "z_coordinate":z_coordinate, 
+                        "occupancy":occupancy, 
+                        "temperature_factor":temperature_factor,
                     }
 
-                    protein[chain_identifier] = letter
+                    residue_number[element_symbol] = atom_letter
         return protein
 
 
-dictionary = Protein("2ki5").general_dictionary()
+dictionary = Protein("2f40").general_dictionary()
 collection.insert_one(dictionary)
 print(dictionary)

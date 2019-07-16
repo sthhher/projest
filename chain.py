@@ -20,22 +20,12 @@ class Chain:
     
     
 """
-    def aminoacid_list(self):
-        for line in extract_atoms_information.load_protein_pdb(self.protein_name):
-            if line.startswith('ATOM'):
-                Aminoacid.aminoacid_name = line[17:20]  #AMINOACIDS -> 3 letras
-                Aminoacid.aminoacid_name = Aminoacid.aminoacid_name.strip()
-                return Aminoacid.aminoacid_name
-
     def transform_aminoacid_list_to_one_letter(self):
         aminoacids_three_letters = self.aminoacid_list()
         aminoacid_one_letter = seq1(aminoacids_three_letters)
         return aminoacid_one_letter
 
     def get_atom_number(self):
-        pass
-    
-    def protein_list(self):
         pass
 
     """
