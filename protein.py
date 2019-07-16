@@ -18,6 +18,8 @@ from chain import Chain
 from aminoacid import Aminoacid
 from atom import Atom
 
+#SETDEFAULT
+
 class Protein(object):
 
     def __init__(self, protein_name):
@@ -73,7 +75,7 @@ class Protein(object):
         residue_A = {}
         residue_B = {}
         residue_C = {}
-        residue_D= {}
+        residue_D = {}
         residue_E = {}
         residue_F = {}
         residue_G = {}
@@ -85,7 +87,7 @@ class Protein(object):
         residue_M = {}
         residue_N = {}
         residue_O = {}
-        residue_P= {}
+        residue_P = {}
         residue_Q = {}
         residue_R = {}
         residue_S = {}
@@ -143,7 +145,6 @@ class Protein(object):
                     
                     if chain_identifier == "A":
                         residue_A[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -162,7 +163,6 @@ class Protein(object):
 
                     elif chain_identifier == "B":
                         residue_B[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -181,7 +181,6 @@ class Protein(object):
 
                     elif chain_identifier == "C":
                         residue_C[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -200,7 +199,6 @@ class Protein(object):
 
                     if chain_identifier == "D":
                         residue_D[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -219,7 +217,6 @@ class Protein(object):
     
                     elif chain_identifier == "E":
                         residue_E[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -238,7 +235,6 @@ class Protein(object):
 
                     elif chain_identifier == "F":
                         residue_F[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -255,7 +251,6 @@ class Protein(object):
 
                     elif chain_identifier == "G":
                         residue_G[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -274,7 +269,6 @@ class Protein(object):
 
                     elif chain_identifier == "H":
                         residue_H[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -293,7 +287,6 @@ class Protein(object):
 
                     elif chain_identifier == "I":
                         residue_I[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -312,7 +305,6 @@ class Protein(object):
     
                     elif chain_identifier == "J":
                         residue_J[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -331,7 +323,6 @@ class Protein(object):
 
                     elif chain_identifier == "K":
                         residue_K[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -350,7 +341,6 @@ class Protein(object):
 
                     elif chain_identifier == "L":
                         residue_L[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -369,7 +359,6 @@ class Protein(object):
 
                     elif chain_identifier == "M":
                         residue_M[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -388,7 +377,6 @@ class Protein(object):
 
                     elif chain_identifier == "N":
                         residue_N[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -407,7 +395,6 @@ class Protein(object):
     
                     elif chain_identifier == "O":
                         residue_O[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -426,7 +413,6 @@ class Protein(object):
 
                     elif chain_identifier == "P":
                         residue_P[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -445,7 +431,6 @@ class Protein(object):
 
                     elif chain_identifier == "Q":
                         residue_Q[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -464,7 +449,6 @@ class Protein(object):
 
                     elif chain_identifier == "R":
                         residue_R[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -483,7 +467,6 @@ class Protein(object):
 
                     elif chain_identifier == "S":
                         residue_S[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -502,7 +485,6 @@ class Protein(object):
     
                     elif chain_identifier == "T":
                         residue_T[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -521,7 +503,6 @@ class Protein(object):
 
                     elif chain_identifier == "U":
                         residue_U[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -540,7 +521,6 @@ class Protein(object):
 
                     elif chain_identifier == "V":
                         residue_V[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -559,7 +539,6 @@ class Protein(object):
 
                     elif chain_identifier == "W":
                         residue_W[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -578,7 +557,6 @@ class Protein(object):
 
                     elif chain_identifier == "X":
                         residue_X[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -597,7 +575,6 @@ class Protein(object):
 
                     elif chain_identifier == "Y":
                         residue_Y[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -616,7 +593,6 @@ class Protein(object):
 
                     elif chain_identifier == "Z":
                         residue_Z[residue_name + " - " + str(value_dictionary)] = {
-                            "chain_identifier":chain_identifier,
                             "residue_sequence_number":residue_sequence_number,
                             "residue_name":residue_name,
                             "ATOM":{
@@ -635,6 +611,6 @@ class Protein(object):
         return protein
 
 
-dictionary = Protein("4M8B").general_dictionary()
+dictionary = Protein("2ki5").general_dictionary()
 collection.insert_one(dictionary)
 print(dictionary)
