@@ -17,6 +17,7 @@ import extract_atoms_information
 from chain import Chain
 from aminoacid import Aminoacid
 from atom import Atom
+from model import Model
 
 #SETDEFAULT
 
@@ -77,6 +78,25 @@ class Protein(object):
                 dicc_hit_def[open_fasta[chain].id[5]]=hit_def #Add to the dictionary
                 chain = chain-1
         return dicc_hit_def
+
+    def create_model_dictionary(self):
+        model_count = 0
+        model_dictionary = {}
+        with open(self.protein_name, 'r+') as text_file:
+            for line in text_file:
+                if line.startswith("MODEL"):
+                    #MODEL
+                    model_count +=1
+
+                    Model.model_identifier = line[11:17]
+                    model_identifier = Model.model_identifier.strip()
+
+                    model_dictionary.setdefault(model_identifier,{})
+        if model_count != 0:
+            return model_dictionary
+        else:
+            model_dictionary = {"1":{}}
+            return model_dictionary
 
     def general_dictionary(self):
         value_dictionary = 0
@@ -139,7 +159,6 @@ class Protein(object):
                     residue_number[element_symbol] = atom_letter
         return protein
 
-
-dictionary = Protein("2f40").general_dictionary()
+dictionary = Protein("2ki5").general_dictionary()
 collection.insert_one(dictionary)
 print(dictionary)
