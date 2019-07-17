@@ -27,6 +27,7 @@ class Protein(object):
         self.protein_name = protein_name
         extract_atoms_information.load_protein_pdb(self.protein_name) #It creates automatically so, we dont have to do it.
         extract_atoms_information.load_protein_fasta(self.protein_name)
+        self.general_dictionary()
     
     def get_sequence_aminoacids (self): #NO ACABADA
         record = []
@@ -79,9 +80,12 @@ class Protein(object):
                 chain = chain-1
         return dicc_hit_def
 
-    def create_model_dictionary(self):
+    def general_dictionary(self):
         model_count = 0
+
+        protein = {"_id":self.protein_name}
         model_dictionary = {}
+
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
                 if line.startswith("MODEL"):
@@ -89,26 +93,15 @@ class Protein(object):
                     model_count +=1
 
                     Model.model_identifier = line[11:17]
-                    model_identifier = Model.model_identifier.strip()
+                    model_identifier = Model.model_identifier.strip() #Model identifier has blanks, I want this value without them
+                    model_dictionary.setdefault("MODEL " + model_identifier, {})
+                    #setdefault equals the first value to the second if it doesnt exist
 
-                    model_dictionary.setdefault(model_identifier,{})
-        if model_count != 0:
-            return model_dictionary
-        else:
-            model_dictionary = {"1":{}}
-            return model_dictionary
+                if not model_count: #When we have only one model we dont have any model count neither model_identifier
+                    model_identifier = "1"
+                    model_dictionary["MODEL 1"]={}
 
-    def general_dictionary(self):
-        value_dictionary = 0
-
-        protein = {"_id":self.protein_name}
-
-        with open(self.protein_name, 'r+') as text_file:
-            for line in text_file:
-                if line.startswith("ATOM"):
-
-                    value_dictionary +=1
-
+                if line[:4] == 'ATOM':
                     #CHAIN
                     Chain.chain_identifier = line[21]
                     chain_identifier = Chain.chain_identifier.strip()
@@ -141,9 +134,9 @@ class Protein(object):
 
                     Atom.element_symbol = line[76:78]
                     element_symbol = Atom.element_symbol.strip()
-                    
-                    #SETDEFAULTs
-                    chain_letter = protein.setdefault(chain_identifier, {})
+
+                    model_id = protein.setdefault("MODEL " + model_identifier, {})
+                    chain_letter = model_id.setdefault(chain_identifier, {})
                     residue_letter = chain_letter.setdefault(residue_name, {})
                     residue_number = residue_letter.setdefault(residue_sequence_number, {})
                     atom_letter = residue_number.setdefault(element_symbol, {})
@@ -155,10 +148,7 @@ class Protein(object):
                         "occupancy":occupancy, 
                         "temperature_factor":temperature_factor,
                     }
+            collection.insert_one(protein) #Insert in mongodb
 
-                    residue_number[element_symbol] = atom_letter
-        return protein
-
-dictionary = Protein("2ki5").general_dictionary()
-collection.insert_one(dictionary)
-print(dictionary)
+similarity = Protein("5b6g").get_similar_protein()
+print(similarity)
