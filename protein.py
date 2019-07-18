@@ -175,6 +175,3 @@ class Protein(object):
                         "temperature_factor":temperature_factor,
                     }
             collection.insert_one(protein) #Insert in mongodb
-
-seq = Protein("2kir").get_sequence_aminoacids()
-print(seq)
