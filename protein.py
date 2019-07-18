@@ -6,12 +6,14 @@ from Bio.SeqUtils import seq1
 from Bio import SeqIO
 from itertools import groupby
 import string
+import os.path as path
+import string
 
 import pymongo
 from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
-db = client["proyecto"]
-collection = db["proteinas"]
+db = client["project"]
+collection = db["proteins"]
 
 import extract_atoms_information
 from chain import Chain
@@ -25,46 +27,65 @@ class Protein(object):
 
     def __init__(self, protein_name):
         self.protein_name = protein_name
-        extract_atoms_information.load_protein_pdb(self.protein_name) #It creates automatically so, we dont have to do it.
-        extract_atoms_information.load_protein_fasta(self.protein_name)
-        self.general_dictionary()
+        extract_atoms_information.load_protein_pdb(self.protein_name) #It creates automatically so, we dont have to do it. #Protein_pdb
+        extract_atoms_information.load_protein_fasta(self.protein_name) #Protein_fasta
+        try: #Check it if exists in mongodb to insert
+            self.general_dictionary()
+        except: 
+            db.protein.find({"_id":self.protein_name}) == True
     
-    def get_sequence_aminoacids (self): #NO ACABADA
-        record = []
-        record = list(SeqIO.read(self.protein_name + "_fasta", "fasta"))
-        print(record[0].seq[0:])
+    def get_sequence_aminoacids (self): #Returns a list with chain and the sequence
+        sequences = {}
+        open_fasta = list(SeqIO.parse(self.protein_name + "_fasta", 'fasta')) #Show all sequences with information in the file
+        chain = (len(open_fasta)-1) #Counts how many chains there are, but we have to keep in mind the 0. We subtract 1 
+        chains = self.get_chain_list()
+        while chain >=0:
+            sequence = open_fasta[chain].seq
+            sequences[chains[chain]] = str(sequence)
+            chain -=1
+        return sequences
 
-    def chain_list(self): #Return the differents chains there are
+    def get_chain_list(self): #Return the differents chains there are
         list_differents_chains = []
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
                 if line.startswith("ATOM"):
                     Chain.chain_identifier = line[21]
-                    Chain.chain_identifier = Chain.chain_identifier.strip()
-                    if Chain.chain_identifier not in list_differents_chains:
-                        list_differents_chains.append(Chain.chain_identifier)
+                    chain_identifier = Chain.chain_identifier.strip()
+                    if chain_identifier not in list_differents_chains:
+                        list_differents_chains.append(chain_identifier)
             return list_differents_chains
 
-    def aminoacid_list(self):
+    def get_aminoacid_list(self): #Return the differents aminoacids in differents sequence classified in chains
+        protein = {}
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
                 if line.startswith("ATOM"):
+                    Chain.chain_identifier = line[21]
+                    chain_identifier = Chain.chain_identifier.strip()
+
                     Aminoacid.residue_name = line[17:20]
                     residue_name = Aminoacid.residue_name.strip()
 
                     Aminoacid.residue_sequence_number = line[22:26]
                     residue_sequence_number = Aminoacid.residue_sequence_number.strip()
-                    return residue_name, residue_sequence_number
+                    
+                    chain_letter = protein.setdefault(chain_identifier, {})
+                    residue_letter = chain_letter.setdefault(residue_name, [])
+                    if residue_sequence_number not in residue_letter:
+                        residue_letter.append(residue_sequence_number)
+        return protein
 
-    def get_similar_protein(self): #VA BIEN -> HACER UN TEST Y UN IF EN LA FUNCION PARA SI UNA CADENA DE PROTEINA ESTA MAL
+    def get_similar_protein(self): 
+        #SALE LA MISMA PROTEINA QUE INTRODUZCO EN ALGUNAS (EJ. 2F40)
         dicc_hit_def = {}
-        open_fasta = list(SeqIO.parse(self.protein_name + "_fasta", 'fasta'))
-        chain = (len(open_fasta)-1)
+        open_fasta = list(SeqIO.parse(self.protein_name + "_fasta", 'fasta')) #Show all sequences with information in the file
+        chain = (len(open_fasta)-1) #Counts how many chains there are, but we have to keep in mind the 0. We subtract 1 
         while chain >=0:
-            fasta_sequence = open_fasta[chain].seq
+            fasta_sequence = open_fasta[chain].seq #We want the sequence
             url = "https://www.rcsb.org/pdb/rest/getBlastPDB1?sequence=" + str(fasta_sequence) + "&eCutOff=10.0&matrix=BLOSUM62&outputFormat=XML" #TENGO QUE HACER QUE ME DIGA EL NOMBRE DE LA PROTEINA
             request = requests.get(url) #Here is where im getting the status_code
-            file_protein_pdb = "similar_protein"
+            file_protein_pdb = "similar_protein_" + self.protein_name #The name that the file will have
 
             if request.status_code == 200: #Check out if a file exists
                 Download = urlopen(url) #Download pdb
@@ -72,15 +93,20 @@ class Protein(object):
                 file.write(Download.read()) 
                 file.close()
                 doc = minidom.parse(file_protein_pdb) #This is for read the xml
-                hits = doc.getElementsByTagName("Hit")
-                hit_def = hits[0].getElementsByTagName("Hit_def")[0] #Define Hit_def
-                hit_def = hit_def.firstChild.data #I want values of hit_def
-                hit_def = hit_def[0:4] #I only want 4 first values of hit_def
-                dicc_hit_def[open_fasta[chain].id[5]]=hit_def #Add to the dictionary
-                chain = chain-1
+                hits = doc.getElementsByTagName("Hit") #Keep what find in the tag hit in hits.
+                if hits != []: #There are wrong chains so they are empty because of there isnt "hit"
+                    hit_def = hits[0].getElementsByTagName("Hit_def")[0] #Define Hit_def
+                    hit_def = hit_def.firstChild.data #I want values of hit_def
+                    hit_def = hit_def[0:4] #I only want 4 first values of hit_def
+                    dicc_hit_def[open_fasta[chain].id[5]]=hit_def #Add to the dictionary
+                    chain = chain-1
+                else: 
+                    dicc_hit_def[open_fasta[chain].id[5]]=None
+                    chain = chain-1
         return dicc_hit_def
 
-    def general_dictionary(self):
+    def general_dictionary(self): #To insert in mongodb. Its automatically
+
         model_count = 0
 
         protein = {"_id":self.protein_name}
@@ -150,5 +176,5 @@ class Protein(object):
                     }
             collection.insert_one(protein) #Insert in mongodb
 
-similarity = Protein("5b6g").get_similar_protein()
-print(similarity)
+seq = Protein("4m8b").get_sequence_aminoacids()
+print(seq)
