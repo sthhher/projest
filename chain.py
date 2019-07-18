@@ -16,16 +16,3 @@ class Chain:
 
     def __str__(self):
         return "%s" %(self.chain_identifier)
-    
-    
-    
-"""
-    def transform_aminoacid_list_to_one_letter(self):
-        aminoacids_three_letters = self.aminoacid_list()
-        aminoacid_one_letter = seq1(aminoacids_three_letters)
-        return aminoacid_one_letter
-
-    def get_atom_number(self):
-        pass
-
-    """

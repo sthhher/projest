@@ -176,5 +176,5 @@ class Protein(object):
                     }
             collection.insert_one(protein) #Insert in mongodb
 
-seq = Protein("4m8b").get_sequence_aminoacids()
+seq = Protein("2kir").get_sequence_aminoacids()
 print(seq)
