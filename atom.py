@@ -9,9 +9,6 @@ class Atom:
         self.occupancy = occupancy
         self.temperature_factor = temperature_factor
         self.element_symbol = element_symbol
-
-    def get_aminoacid(self):
-        pass
                        
     def __str__(self):
         return "%s - %.2f - %.2f - %.2f - %.2f - %.2f - %s" %(self.atom_name, self.x_coordinate, 
