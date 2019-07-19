@@ -176,5 +176,4 @@ class Protein(object):
                     }
             collection.insert_one(protein) #Insert in mongodb
 
-listt = Protein("2ki5").get_similar_protein()
-print(listt)
+Protein("5555")

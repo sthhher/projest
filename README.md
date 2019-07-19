@@ -18,6 +18,6 @@ There are 7 functions:
   - get_chain_list: in Protein. Return a list with the differents chains there are.
   - get_aminoacid_list: in Protein. Return a list with the differents aminoacids (3 letters) with the differents sequence numbers classified in chains
   - get_similar_protein: in Protein. Return a dictionary with differents chains and the most similar protein of that chain of the protein.
-  - general_dictionary: in Protein. Any return. It inserts in mongodb all the information classified. 
+  - general_dictionary: in Protein. Any return. It inserts in mongodb all the information classified. It is not callable.
   - load_protein_pdb: in extract_atoms_information. Returns the pdb file of the protein. Download the pdb file of the protein in the same directory of the files. 
   - load_protein_fasta: in extract_atoms_information. Returns the fasta file of the protein.Download the fasta file of the protein in the same directory of the files. 
