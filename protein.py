@@ -56,7 +56,7 @@ class Protein(object):
                         list_differents_chains.append(chain_identifier)
             return list_differents_chains
 
-    def get_aminoacid_list(self): #Return the differents aminoacids in differents sequence classified in chains
+    def get_aminoacid_list(self): #Return the differents aminoacids with the differents sequence number classified in chains
         protein = {}
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
@@ -175,3 +175,6 @@ class Protein(object):
                         "temperature_factor":temperature_factor,
                     }
             collection.insert_one(protein) #Insert in mongodb
+
+listt = Protein("2ki5").get_similar_protein()
+print(listt)
