@@ -12,4 +12,12 @@ The main file is protein.py. In spite of main functions are in extract_atoms_inf
 In this way we will have functions directly linked to protein like:
 Protein("2ki5").get_similar_protein() -> We will obtain fasta file, pdb file, all the information of protein in mongodb (in the init) and the similar protein of each chain. 
 
-
+## Functions
+There are 7 functions:
+  - get_sequence_aminoacids: in Protein. Returns a list with chain and the sequence of aminoacids (1 letter). From fasta file.
+  - get_chain_list: in Protein. Return a list with the differents chains there are.
+  - get_aminoacid_list: in Protein. Return a list with the differents aminoacids (3 letters) with the differents sequence numbers classified in chains
+  - get_similar_protein: in Protein. Return a dictionary with differents chains and the most similar protein of that chain of the protein.
+  - general_dictionary: in Protein. Any return. It inserts in mongodb all the information classified. 
+  - load_protein_pdb: in extract_atoms_information. Returns the pdb file of the protein. Download the pdb file of the protein in the same directory of the files. 
+  - load_protein_fasta: in extract_atoms_information. Returns the fasta file of the protein.Download the fasta file of the protein in the same directory of the files. 
