@@ -24,8 +24,8 @@ setup(
     description = 'Pass the file of github to pipy',
     author = 'Esther Vendrell',
     author_email = 'esvemira@hotmail.com',
-    url = 'https://github.com/sthhher/eproj.git', # use the URL to the github repo
-    download_url = 'https://github.com/sthhher/eproj.git/tarball/0.1',
+    url = 'https://github.com/sthhher/projest', # use the URL to the github repo
+    download_url = 'https://github.com/sthhher/projest/tarball/0.1',
     keywords = ['testing', 'logging', 'example'],
     classifiers = [],
 >>>>>>> 385e2b8d45c70a2f7876ab852418c3344cc9b2c0
