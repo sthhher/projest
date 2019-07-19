@@ -2,16 +2,20 @@ import setuptools
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
- 
+
 setuptools.setup(
-    name='eproj',
-    packages=setuptools.find_packages(), # Mismo nombre que en la estructura de carpetas de arriba
-    version='0.1',
-    license='LGPL v3', # La licencia que tenga tu paqeute
-    description='A random test lib',
-    author='Esther',
-    author_email='esvemira@hotmail.com',
-    url='https://github.com/sthhher/projest', # Usa la URL del repositorio de GitHub
-    keywords='test example develop', # Palabras que definan tu paquete
-    classifiers=['Programming Language :: Python'],
+    name="example-pkg-your-username",
+    version="0.0.1",
+    author="Esther Vendrell",
+    author_email="esvemira@hotmail.com",
+    description="A small example package",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="https://github.com/sthhher/projest.git",
+    packages=setuptools.find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
 )
