@@ -1,4 +1,4 @@
-<center> # Projest </center>
+# Projest
 
 Made by [Esther Vendrell]
 
