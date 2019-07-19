@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="example-pkg-your-username",
-    version="0.0.1",
+    version="0.0.2",
     author="Esther Vendrell",
     author_email="esvemira@hotmail.com",
     description="A small example package",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/sthhher/projest.git",
+    url="https://github.com/sthhher/projest",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
