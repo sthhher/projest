@@ -21,3 +21,22 @@ There are 7 functions:
   - general_dictionary: in Protein. Any return. It inserts in mongodb all the information classified. It is not callable.
   - load_protein_pdb: in extract_atoms_information. Returns the pdb file of the protein. Download the pdb file of the protein in the same directory of the files. 
   - load_protein_fasta: in extract_atoms_information. Returns the fasta file of the protein.Download the fasta file of the protein in the same directory of the files. 
+
+## MongoDB
+I could have used an other structure to upload all the information to MongoDB:
+Protein - Model - residue_sequence_number - atom_number - information atom. 
+
+Class Model:
+    def __init__(self, model_identifier, model_dict):
+        self.model_identifier = model_identifier
+        self.chain_list = []
+        for chain_identifier, value in model_dict:
+            self.chain_list.append(Chain(chain_identifier))
+
+In this way we obtain information from mongodb. This would be easier but I haven't had enough time since I have realized.
+
+The structure of my project is:
+Portein - Model - residue_name - residue_sequence_number - element_name - atom_name - information atom. 
+
+This is more easy to understand the information we are getting and classified it. This is why I have used this structure. Visually is better but for obtaining this information internally it is worse.
+
