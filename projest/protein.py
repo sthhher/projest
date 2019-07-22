@@ -15,7 +15,7 @@ client = MongoClient('localhost', 27017)
 db = client["project"]
 collection = db["proteins"]
 
-from projest import atom, model, chain, extract_atoms_information, aminoacid
+from projest import atom, model, chain, extract_atoms_information, aminoacid, protein
 
 class Protein(object):
 
