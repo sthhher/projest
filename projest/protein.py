@@ -169,6 +169,3 @@ class Protein(object):
                         "temperature_factor":temperature_factor,
                     }
             collection.insert_one(protein) #Insert in mongodb
-
-protein = Protein("5iz6").get_similar_protein()
-print(protein)
