@@ -15,13 +15,7 @@ client = MongoClient('localhost', 27017)
 db = client["project"]
 collection = db["proteins"]
 
-import extract_atoms_information
-from chain import Chain
-from aminoacid import Aminoacid
-from atom import Atom
-from model import Model
-
-#SETDEFAULT
+from projest import atom, model, chain, extract_atoms_information, aminoacid
 
 class Protein(object):
 
@@ -50,10 +44,10 @@ class Protein(object):
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
                 if line.startswith("ATOM"):
-                    chain_identifier = line[21].strip()
-                    cadena = Chain(chain_identifier)
-                    if cadena.chain_identifier not in list_differents_chains:
-                        list_differents_chains.append(cadena)
+                    chain.Chain.chain_identifier = line[21]
+                    chain_identifier = chain.Chain.chain_identifier.strip()
+                    if chain_identifier not in list_differents_chains:
+                        list_differents_chains.append(chain_identifier)
             return list_differents_chains
 
     def get_aminoacid_list(self): #Return the differents aminoacids with the differents sequence number classified in chains
@@ -61,14 +55,14 @@ class Protein(object):
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
                 if line.startswith("ATOM"):
-                    Chain.chain_identifier = line[21]
-                    chain_identifier = Chain.chain_identifier.strip()
+                    chain.Chain.chain_identifier = line[21]
+                    chain_identifier = chain.Chain.chain_identifier.strip()
 
-                    Aminoacid.residue_name = line[17:20]
-                    residue_name = Aminoacid.residue_name.strip()
+                    aminoacid.Aminoacid.residue_name = line[17:20]
+                    residue_name = aminoacid.Aminoacid.residue_name.strip()
 
-                    Aminoacid.residue_sequence_number = line[22:26]
-                    residue_sequence_number = Aminoacid.residue_sequence_number.strip()
+                    aminoacid.Aminoacid.residue_sequence_number = line[22:26]
+                    residue_sequence_number = aminoacid.Aminoacid.residue_sequence_number.strip()
                     
                     chain_letter = protein.setdefault(chain_identifier, {})
                     residue_letter = chain_letter.setdefault(residue_name, [])
@@ -101,7 +95,7 @@ class Protein(object):
                     dicc_hit_def[open_fasta[chain].id[5]]=hit_def #Add to the dictionary
                     chain = chain-1
                 else: 
-                    dicc_hit_def[open_fasta[chain].id[5]]=None
+                    dicc_hit_def[open_fasta[chain].id[5]] = None
                     chain = chain-1
         return dicc_hit_def
 
@@ -118,8 +112,8 @@ class Protein(object):
                     #MODEL
                     model_count +=1
 
-                    Model.model_identifier = line[11:17]
-                    model_identifier = Model.model_identifier.strip() #Model identifier has blanks, I want this value without them
+                    model.Model.model_identifier = line[11:17]
+                    model_identifier = model.Model.model_identifier.strip() #Model identifier has blanks, I want this value without them
                     model_dictionary.setdefault("MODEL " + model_identifier, {})
                     #setdefault equals the first value to the second if it doesnt exist
 
@@ -129,37 +123,37 @@ class Protein(object):
 
                 if line[:4] == 'ATOM':
                     #CHAIN
-                    Chain.chain_identifier = line[21]
-                    chain_identifier = Chain.chain_identifier.strip()
+                    chain.Chain.chain_identifier = line[21]
+                    chain_identifier = chain.Chain.chain_identifier.strip()
 
                     #AMINOACID
-                    Aminoacid.residue_name = line[17:20]
-                    residue_name = Aminoacid.residue_name.strip()
+                    aminoacid.Aminoacid.residue_name = line[17:20]
+                    residue_name = aminoacid.Aminoacid.residue_name.strip()
 
-                    Aminoacid.residue_sequence_number = line[22:26]
-                    residue_sequence_number = Aminoacid.residue_sequence_number.strip()
+                    aminoacid.Aminoacid.residue_sequence_number = line[22:26]
+                    residue_sequence_number = aminoacid.Aminoacid.residue_sequence_number.strip()
 
                     #ATOM
-                    Atom.atom_name = line[12:16]
-                    atom_name = Atom.atom_name.strip()
+                    atom.Atom.atom_name = line[12:16]
+                    atom_name = atom.Atom.atom_name.strip()
 
-                    Atom.x_coordinate = line[30:38]
-                    x_coordinate = float(Atom.x_coordinate.strip())
+                    atom.Atom.x_coordinate = line[30:38]
+                    x_coordinate = float(atom.Atom.x_coordinate.strip())
 
-                    Atom.y_coordinate = line[38:46]
-                    y_coordinate = float(Atom.y_coordinate.strip())
+                    atom.Atom.y_coordinate = line[38:46]
+                    y_coordinate = float(atom.Atom.y_coordinate.strip())
 
-                    Atom.z_coordinate = line[46:54]
-                    z_coordinate = float(Atom.z_coordinate.strip())
+                    atom.Atom.z_coordinate = line[46:54]
+                    z_coordinate = float(atom.Atom.z_coordinate.strip())
 
-                    Atom.occupancy = line[54:60]
-                    occupancy = float(Atom.occupancy.strip())
+                    atom.Atom.occupancy = line[54:60]
+                    occupancy = float(atom.Atom.occupancy.strip())
 
-                    Atom.temperature_factor = line[60:66]
-                    temperature_factor = float(Atom.temperature_factor.strip())
+                    atom.Atom.temperature_factor = line[60:66]
+                    temperature_factor = float(atom.Atom.temperature_factor.strip())
 
-                    Atom.element_symbol = line[76:78]
-                    element_symbol = Atom.element_symbol.strip()
+                    atom.Atom.element_symbol = line[76:78]
+                    element_symbol = atom.Atom.element_symbol.strip()
 
                     model_id = protein.setdefault("MODEL " + model_identifier, {})
                     chain_letter = model_id.setdefault(chain_identifier, {})
@@ -176,11 +170,5 @@ class Protein(object):
                     }
             collection.insert_one(protein) #Insert in mongodb
 
-protein = Protein("2ki5")
-print(protein.protein_name)
-x = db.proteins.find_one({"_id":protein.protein_name})
-models = [model for model, value in x.items()]
-print(x['MODEL 1']['A']['MET']['46']['C'].keys())
-for carbon, value in x['MODEL 1']['A']['MET']['46']['C'].items():
-    print(carbon)
-
+protein = Protein("5iz6").get_similar_protein()
+print(protein)
