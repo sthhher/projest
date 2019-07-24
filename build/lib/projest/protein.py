@@ -17,7 +17,7 @@ collection = db["proteins"]
 
 from projest import atom, model, chain, protein, extract_atoms_information, aminoacid
 
-class Protein:
+class Protein(object):
 
     def __init__(self, protein_name):
         self.protein_name = protein_name
@@ -27,13 +27,8 @@ class Protein:
             self.general_dictionary()
         except: 
             db.protein.find({"_id":self.protein_name}) == True
-
+    
     def get_sequence_aminoacids (self): #Returns a list with chain and the sequence
-        """
-        :param: self
-        :return: sequences
-        :rtype: chain dictionary with aminoacids (one letter)
-        """
         sequences = {}
         open_fasta = list(SeqIO.parse(self.protein_name + "_fasta", 'fasta')) #Show all sequences with information in the file
         chain = (len(open_fasta)-1) #Counts how many chains there are, but we have to keep in mind the 0. We subtract 1 
@@ -45,11 +40,6 @@ class Protein:
         return sequences
 
     def get_chain_list(self): #Return the differents chains there are
-        """
-        :param: self
-        :return: list_differents_chains
-        :rtype: a list with all the chains that may have
-        """
         list_differents_chains = []
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
@@ -61,11 +51,6 @@ class Protein:
             return list_differents_chains
 
     def get_aminoacid_list(self): #Return the differents aminoacids with the differents sequence number classified in chains
-        """
-        :param: self
-        :return: protein
-        :rtype: a dictionary with all the chains, inside of that another dictionary with all the aminoacids that exist and inside of aminoacids a list with all the sequence number that have
-        """
         protein = {}
         with open(self.protein_name, 'r+') as text_file:
             for line in text_file:
@@ -86,11 +71,6 @@ class Protein:
         return protein
 
     def get_similar_protein(self): 
-        """
-        :param: self
-        :return: dicc_hit_def
-        :rtype: a dictionary with all the chains as a key, and the value is the most similar protein
-        """
         #SALE LA MISMA PROTEINA QUE INTRODUZCO EN ALGUNAS (EJ. 2F40)
         dicc_hit_def = {}
         open_fasta = list(SeqIO.parse(self.protein_name + "_fasta", 'fasta')) #Show all sequences with information in the file
@@ -120,11 +100,7 @@ class Protein:
         return dicc_hit_def
 
     def general_dictionary(self): #To insert in mongodb. Its automatically
-        """
-        :param: self
-        :return: there is no return. 
-        :function: insert in mongodb all the information. Protein - Models - Chains - Residue name - Residue Sequence Number - Element symbol - Atom name
-        """
+
         model_count = 0
 
         protein = {"_id":self.protein_name}
